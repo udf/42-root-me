@@ -1,7 +1,9 @@
 # ssh ... < commands.sh
 # needs manual intervention
 
-cat << 'EOF' > /tmp/crack_ch21.py
+f=$(mktemp)
+
+cat << 'EOF' > $f
 import subprocess
 import crypt
 
@@ -18,6 +20,6 @@ while 1:
     p.wait()
 EOF
 
-python3 /tmp/crack_ch21.py
+python3 $f
 
 # enter "cat .passwd" in the shell
