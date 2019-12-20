@@ -1,9 +1,3 @@
-;  nasm -f elf -o out.o getpw.s
-; first check for nulls:
-;  objdump -d out.o
-; or dump shellcode:
-;  objcopy --output-target=binary --only-section=.text out.o getpw.bin
-
 section .data
 ; crickets
 
