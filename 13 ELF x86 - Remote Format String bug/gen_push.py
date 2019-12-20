@@ -14,6 +14,6 @@ for i in range(len(target) // chunk_size):
     j = i * chunk_size
     chunk = target[j:j + chunk_size]
     v = struct.unpack('>I', chunk)[0]
-    print(f'push 0x{v:08x} ; {repr(chunk)[2:-1]}')
+    print(f'push 0x{v:08x} ; {repr(chunk[::-1])[2:-1]}')
 
 print(f'add esp, {len(target)} ; clean up stack')

